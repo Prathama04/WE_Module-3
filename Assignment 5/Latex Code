@@ -1,0 +1,171 @@
+\documentclass{article}
+\title{Developing Strategies for the Bidding Card Game 'Diamonds' with GenAI}
+\author{Prathama Pratihar}
+\date{\today}
+\usepackage{listings}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\newcommand\shortlorem{}
+
+\section{Introduction}
+This report explores the outcomes of prompting GenAI to develop a computer program utilizing optimization strategies to compete in the Diamonds card game against human players. Diamonds, known for its strategic depth and bid-based gameplay, serves as an ideal testing ground for AI-driven decision-making. Through this simulation, we aim to assess the effectiveness of AI-powered strategies in navigating the complexities of Diamonds gameplay.
+\shortlorem
+\section{Problem Statement}
+To  write a report or an essay with the result of prompting GenAI to create a computer program that uses some optimizing strategy to play the game of Diamonds against you.
+
+\section{Rules}
+The basic rules for playing Diamonds:
+\begin{itemize}
+    \item \textbf{Setup}:
+    \begin{itemize}
+        \item Use a standard 52-card deck.
+        \item Deal 10 cards to each player for games with 2-3 players, or 7 cards for games with 4-6 players.
+        \item Place the remaining cards in the draw pile.
+    \end{itemize}
+    
+    \item \textbf{Objective}:
+    \begin{itemize}
+        \item The goal is to earn the most points by collecting diamond cards and utilizing diamond tokens effectively.
+    \end{itemize}
+    
+    \item \textbf{Bidding Phase}:
+    \begin{itemize}
+        \item Players bid for the number of diamond cards they think they can collect in tricks. Bids must be between 0 and the number of cards in their hand.
+        \item The player with the highest bid becomes the "declarer" for the round.
+    \end{itemize}
+    
+    \item \textbf{Gameplay}:
+    \begin{itemize}
+        \item The player to the left of the declarer leads the first trick.
+        \item Players must follow suit if possible. If not, they can play any card.
+        \item If a player cannot follow suit and plays a diamond, they earn a diamond token.
+        \item The player who wins a trick containing at least one diamond collects those diamonds and places them in front of them, along with any diamond tokens they've earned.
+        \item The winner of each trick leads to the next trick.
+    \end{itemize}
+    
+    \item \textbf{Scoring}:
+    \begin{itemize}
+        \item At the end of the round, players score points based on:
+        \begin{itemize}
+            \item The number of diamond cards collected in tricks.
+            \item The number of diamond tokens earned.
+            \item Additional bonuses provided by certain cards.
+        \end{itemize}
+        \item Unused diamond tokens can be converted into points.
+    \end{itemize}
+    
+    \item \textbf{End of Round}:
+    \begin{itemize}
+        \item After all tricks have been played, the next player becomes the declarer for the next round.
+    \end{itemize}
+    
+    \item \textbf{End of Game}:
+    \begin{itemize}
+        \item The game typically consists of multiple rounds, with the player accumulating the most points over all rounds declared the winner.
+    \end{itemize}
+    
+    \item \textbf{Special Cards}:
+    \begin{itemize}
+        \item Some cards have special abilities, such as allowing players to exchange cards with the draw pile or steal diamonds from opponents.
+    \end{itemize}
+\end{itemize}
+
+\section{Teaching Gen AI the game}
+
+Bidding Phase:
+\begin{itemize}
+\item Player 1 assesses their hand and decides to bid 3 diamond cards.
+\item Player 2 believes they have a strong hand and confidently bids 5 diamond cards.
+\item Player 3 (the AI Player) carefully evaluates their cards and cautiously bids 4 diamond cards.
+\item In the bidding phase, each player strategically evaluates their hand and predicts how many diamond cards they can collect during the round. Player 2 makes a bold bid, while Player 3 (the AI Player) chooses a more conservative approach.
+\end{itemize}
+Gameplay:
+\begin{itemize}
+\item Player 1 leads the first trick by playing the 8 of Diamonds.
+\item Player 2 follows suit and plays the Jack of Diamonds.
+\item Player 3 (the AI Player) decides to play the 6 of Hearts, as they lack diamonds and want to save their higher cards for later tricks.
+\item Player 1 plays the 4 of Hearts.
+\end{itemize}
+
+Scoring:
+\begin{itemize}
+\item At the end of the round, Player 2 successfully collects 3 diamond cards, earning 3 points.
+\item Player 3 (the AI Player) manages to collect 2 diamond cards, earning 2 points.
+\item Player 1, unfortunately, collects only 1 diamond card, scoring 1 point.
+\item Players score points based on the number of diamond cards they collect during tricks. In this round, Player 2 earns the most points, followed by Player 3 (the AI Player) and Player 1.
+\end{itemize}
+
+\section{Iterating  upon Strategy}
+On asking ChatGPT to suggest some strategies to consider while playing Diamonds, it gave the following response:
+Certainly! Here are some strategies to consider when playing Diamonds:
+\begin{itemize}
+        \item Evaluate Hands: Assess your hand's strength before bidding.
+        \item Bid Wisely: Make cautious bids based on hand strength and potential.
+        \item Focus on Diamonds: Prioritize winning diamond tricks for points.
+        \item Acquire Tokens: Strategically earn diamond tokens for scoring advantages.
+        \item Utilize Special Cards: Time the use of special cards for maximum benefit.
+        \item Adapt to Opponents: Adjust strategy based on opponents' moves and bids.
+        \item Manage Risk: Balance risk in trick-taking to avoid penalties.
+        \item Exploit Bonuses: Seize opportunities for bonus points through cards and tokens.
+        \item Seek Consistency: Strive for consistent scoring across rounds.
+        \item Remain Flexible: Stay adaptable to evolving game situations and opponents' strategies.
+\end{itemize}
+\section{Code}
+Prompt Given - Can you write a basic Python code that simulates a third player implementing these strategies?
+ChatGPT:
+\begin{lstlisting}
+import random
+
+class Player:
+    def __init__(self, name):
+        self.name = name
+        self.hand = []
+
+    def add_to_hand(self, card):
+        self.hand.append(card)
+
+    def play_card(self, valid_cards):
+        # Simulate the decision-making process of the player
+        # Implement the strategies here
+        # For simplicity, this code just randomly selects a valid card from the hand
+        return random.choice(valid_cards)
+
+def main():
+    # Example initialization of the game
+    player1 = Player("Player 1")
+    player2 = Player("Player 2")
+    player3 = Player("AI Player")  # AI Player implementing the strategies
+
+    players = [player1, player2, player3]
+
+    # Example dealing cards to players
+    deck = ["2D", "3D", "4D", "5D", "6D", "7D", "8D", "9D", "10D", "JD", "QD", "KD", "AD"]
+    random.shuffle(deck)
+    for i, card in enumerate(deck):
+        players[i % 3].add_to_hand(card)
+
+    # Example trick-taking phase
+    tricks = 5
+    for trick in range(tricks):
+        trick_cards = []
+
+        for player in players:
+            # Simulate valid cards the player can play (just for demonstration)
+            valid_cards = player.hand[:]  # Assuming all cards are valid for simplicity
+            selected_card = player.play_card(valid_cards)
+            player.hand.remove(selected_card)
+            trick_cards.append(selected_card)
+
+        print("Trick", trick + 1, ":", trick_cards)
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+\section{Conclusion}
+Some parts of the code generated by ChatGPT weren’t up to the mark and needed some corrections. Overall I was surprised by how much it knew about the game without me needing to tell the rules.
+\shortlorem
+
+
+\end{document}
